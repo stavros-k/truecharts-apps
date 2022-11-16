@@ -2,6 +2,7 @@
 {{- include "tc.common.loader.init" . }}
 
 {{- include "magicmirror.config" . }}
+{{- include "magicmirror.modules" . }}
 
 {{/* Render the templates */}}
 {{ include "tc.common.loader.apply" . }}

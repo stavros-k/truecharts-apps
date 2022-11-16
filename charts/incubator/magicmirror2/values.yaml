@@ -18,16 +18,8 @@ magicmirror:
   time_format: "24"
   units: metrics
   ip_whitelist: []
-  alert:
-    effect: slide
-    alert_effect: jelly
-    display_time: 3500
-    position: center
-    welcome_message: ""
-  update_notification:
-    position: top_bar
-    updateInterval: 600000
-    ignoreModules: []
+  mm2_modules: [{ module: "clock", position: "top_left"}]
+  mm2_modules_dl: []
 
 envFrom:
   - configMapRef:
@@ -64,6 +56,15 @@ persistence:
     volumeSpec:
       configMap:
         name: '{{ printf "%s-magicmirror-config" (include "tc.common.names.fullname" .) }}'
+  modulesfile:
+    enabled: true
+    type: custom
+    mountPath: /magicmirror2/modules/modules.txt
+    subPath: modules.txt
+    defaultMode: "0770"
+    volumeSpec:
+      configMap:
+        name: '{{ printf "%s-magicmirror-modules" (include "tc.common.names.fullname" .) }}'
 
 portal:
   enabled: true
